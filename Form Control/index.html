@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form id="uyelikFormu" name="uyelikFormu" action="xxx.php" method="post">
+        <table>
+            <tr>
+                <th colspan="3">Üyelik Formu</th>
+            </tr>
+            <tr>
+                <td>Kullanıcı Adı</td>
+                <td>:</td>
+                <td><input type="text" id="kullaniciAdi" name="kullaniciAdi" /></td>
+            </tr>
+            <tr>
+                <td>Kullanıcı Şifresi</td>
+                <td>:</td>
+                <td><input type="password" id="kullaniciSifresi" name="kullaniciSifresi" /></td>
+            </tr>
+            <tr>
+                <td>Kullanıcı Şifresi Tekrar</td>
+                <td>:</td>
+                <td><input type="password" id="kullaniciSifresiTekrar" name="kullaniciSifresiTekrar" /></td>
+            </tr>
+            <tr>
+                <td>Email Adresi</td>
+                <td>:</td>
+                <td><input type="email" id="emailAdresi" name="emailAdresi" /></td>
+            </tr>
+            <tr>
+                <td>Cinsiyet</td>
+                <td>:</td>
+                <td><input type="radio" id="cinsiyet1" name="cinsiyet" value="Erkek" />Erkek<input type="radio" id="cinsiyet2" name="cinsiyet" value="Kadın" />Kadın</td>
+            </tr>
+            <tr>
+                <td>Hobiler</td>
+                <td>:</td>
+                <td><input type="checkbox" id="hobiler1" name="hobiler" value="alışveriş" />Alışveriş<input type="checkbox" id="hobiler2" name="hobiler" value="gezmek" />Gezmek<input type="checkbox" id="hobiler3" name="hobiler" value="müzik" />Müzik</td>
+            </tr>
+            <tr>
+                <td>Not</td>
+                <td>:</td>
+                <td><textarea id="kullaniciMesaji" name="kullaniciMesaji"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align:center;"><input type="button" value="Gönder" onclick="formKontrolu()"/></td>
+            </tr>
+        </table>
+    </form>
+
+
+    <script type="text/javascript" language="javascript">
+
+        function formKontrolu() {
+            if (document.getElementById('kullaniciAdi').value == "") {
+                alert('Kullanıcı adı alanı boş bırakılamaz!');
+                document.uyelikFormu.kullaniciAdi.focus();
+                return;
+            }
+            if (document.getElementById('kullaniciAdi').value != "") {
+                if (document.getElementById('kullaniciAdi').value.length < 4 || document.getElementById('kullaniciAdi').value.length > 25) {
+                    alert('Kullanıcı adı minimum 4 karakter, maksimum 25 karakter aralığında olmalıdır!');
+                    document.uyelikFormu.kullaniciAdi.value = "";
+                    document.uyelikFormu.kullaniciAdi.focus();
+                    return;
+                }
+            }
+            if (document.getElementById('kullaniciSifresi').value == "") {
+                alert('Kullanıcı şifresi alanı boş bırakılamaz!');
+                document.uyelikFormu.kullaniciSifresi.focus();
+                return;
+            }
+            if (document.getElementById('kullaniciSifresi').value != "") {
+                if (document.getElementById('kullaniciSifresi').value.length < 4 || document.getElementById('kullaniciSifresi').value.length > 25) {
+                    alert('Kullanıcı şifresi minimum 4 karakter, maksimum 25 karakter aralığında olmalıdır!');
+                    document.uyelikFormu.kullaniciSifresi.value = "";
+                    document.uyelikFormu.kullaniciSifresiTekrar.value = "";
+                    document.uyelikFormu.kullaniciSifresi.focus();
+                    return;
+                }
+            }
+            if (document.getElementById('kullaniciSifresiTekrar').value == "") {
+                alert('Lütfen şifrenizi tekrar yazınız!');
+                document.uyelikFormu.kullaniciSifresiTekrar.focus();
+                return;
+            }
+            if (document.getElementById('kullaniciSifresiTekrar').value != "") {
+                if (document.getElementById('kullaniciSifresiTekrar').value.length < 4 || document.getElementById('kullaniciSifresiTekrar').value.length > 25) {
+                    alert('Kullanıcı şifresi tekrarı minimum 4 karakter, maksimum 25 karakter aralığında olmalıdır!');
+                    document.uyelikFormu.kullaniciSifresi.value = "";
+                    document.uyelikFormu.kullaniciSifresiTekrar.value = "";
+                    document.uyelikFormu.kullaniciSifresi.focus();
+                    return;
+                }
+            }
+            if (document.getElementById('kullaniciSifresi').value != "" && document.getElementById('kullaniciSifresiTekrar').value != "") {
+                if (document.getElementById('kullaniciSifresi').value != document.getElementById('kullaniciSifresiTekrar').value) {
+                    alert('Kullanıcı şifresi ile kullanıcı şifresi tekrarı birbirleri ile aynı değildir!');
+                    document.uyelikFormu.kullaniciSifresi.value = "";
+                    document.uyelikFormu.kullaniciSifresiTekrar.value = "";
+                    document.uyelikFormu.kullaniciSifresi.focus();
+                    return;
+                }
+            }
+            if (document.getElementById('emailAdresi').value == "") {
+                alert('Lütfen email adresinizi giriniz!');
+                document.uyelikFormu.emailAdresi.focus();
+                return;
+            }
+            if (document.getElementById('emailAdresi').value != "") {
+                if (document.getElementById('emailAdresi').value.indexOf('@', 0) == -1 || document.getElementById('emailAdresi').value.indexOf('.', 0) == -1 ) {
+                    alert('Bu email adresi uygun değil!');
+                    document.uyelikFormu.emailAdresi.value = "";
+                    document.uyelikFormu.emailAdresi.focus();
+                    return;
+                }
+            }
+
+            if (document.getElementsByName('cinsiyet')[0].checked == false && document.getElementsByName('cinsiyet')[1].checked == false ) {
+                alert('Cinsiyet alanı seçilmelidir!');
+                return;
+            }
+            if (document.getElementsByName('hobiler')[0].checked == false && document.getElementsByName('hobiler')[1].checked == false && document.getElementsByName('hobiler')[2].checked == false) {
+                alert('Lütfen hobilerinizi belirtiniz!');
+                return;
+            }
+            if (document.getElementById('kullaniciMesaji').value == "") {
+                alert('Kullanıcı notu alanı boş bırakılamaz!');
+                document.uyelikFormu.kullaniciMesaji.focus();
+                return;
+            }
+            document.uyelikFormu.submit();
+        }
+
+    </script>
+</body>
+</html>
